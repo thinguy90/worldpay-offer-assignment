@@ -128,21 +128,15 @@ public class OfferServiceTest {
         offer.setStatus(Status.ACTIVE);
         offer.setId(40000);
 
-        when(offerService.find(offer.getId())).thenReturn(Optional.of(offer));
-
         Throwable thrown = catchThrowable(() -> {
             offerService.validateOfferExists(offer);
         });
         assertThat(thrown).isInstanceOf(ValidationException.class).hasNoCause().hasMessageStartingWith("Offer does not exist");
 
-        when(merchantService.find(offer.getMerchantId())).thenReturn(Optional.of(merchant));
-        when(offerService.merchantService.find(offer.getMerchantId())).thenReturn(Optional.of(merchant));
-
+        when(offerRepository.findOne(new Long(offer.getId()))).thenReturn(offer);
         thrown = catchThrowable(() -> {
             offerService.validateOfferExists(offer);
         });
         assertThat(thrown).isNull();
-
-
     }
 }
