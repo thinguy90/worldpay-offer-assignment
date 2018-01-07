@@ -2,7 +2,7 @@
 Worldpay Offer REST assignment 
 
 
-Java solution using Springboot.
+Java solution using Springboot,using JPA with H2 as an in-memory database.
 
 It was assumed that the merchant will not use any other ID other than the one allocated to them, using authentication 
 would provide a way to ensure this validation could be put in place
